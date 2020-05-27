@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Данила Прокопенко](https://up.htmlacademy.ru/javascript/20/user/324297).
-* Наставник: `Дмитрий Рябинин`.
+* Наставник: [Дмитрий Рябинин](https://up.htmlacademy.ru/javascript/20/user/63289).
 
 ---
 
