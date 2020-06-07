@@ -1,7 +1,10 @@
 'use strict';
 var Y_MIN = 130;
 var Y_MAX = 630;
+var PIN_WIDTH = 50;
+var PIN_HEIGHT = 70;
 var map = document.querySelector('.map');
+var mapPins = document.querySelector('.map__pins');
 var types = ['palace', 'flat', 'house', 'bungalo'];
 var checkinTimes = ['12:00', '13:00', '14:00'];
 var checkoutTimes = ['12:00', '13:00', '14:00'];
@@ -10,7 +13,7 @@ var photos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.g
 var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
 map.classList.remove('map--faded');
 
-function randomInteger(min, max) {
+function getRandomInteger(min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
@@ -24,8 +27,8 @@ var createData = function () {
     var locationObj = {};
 
     authorObj.avatar = 'img/avatars/user0' + i + '.png';
-    locationObj.x = randomInteger(0, map.offsetWidth);
-    locationObj.y = randomInteger(Y_MIN, Y_MAX);
+    locationObj.x = getRandomInteger(0, map.offsetWidth);
+    locationObj.y = getRandomInteger(Y_MIN, Y_MAX);
     offerObj.title = 'заголовок предложения' + i;
     offerObj.address = locationObj.x + ' , ' + locationObj.y;
     offerObj.price = Math.ceil(Math.random() * i * 100);
@@ -44,11 +47,14 @@ var createData = function () {
   }
   return data;
 };
+var pinsData = createData();
 
-for (var i = 0; i < 8; i++) {
+for (var i = 0; i < pinsData.length; i++) {
   var newPin = mapPin.cloneNode(true);
-  newPin.style.left = 0 + 'px';
-  newPin.style.top = 0 + 'px';
-
-  map.appendChild(newPin);
+  var img = newPin.querySelector('img');
+  newPin.style.left = pinsData[i].location.x - PIN_WIDTH / 2 + 'px';
+  newPin.style.top = pinsData[i].location.y - PIN_HEIGHT + 'px';
+  img.src = pinsData[i].author.avatar;
+  img.alt = pinsData[i].offer.title;
+  mapPins.appendChild(newPin);
 }
