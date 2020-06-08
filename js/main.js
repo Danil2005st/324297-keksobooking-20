@@ -49,12 +49,25 @@ var createData = function () {
 };
 var pinsData = createData();
 
-for (var i = 0; i < pinsData.length; i++) {
+var createPin = function (pin) {
   var newPin = mapPin.cloneNode(true);
   var img = newPin.querySelector('img');
-  newPin.style.left = pinsData[i].location.x - PIN_WIDTH / 2 + 'px';
-  newPin.style.top = pinsData[i].location.y - PIN_HEIGHT + 'px';
-  img.src = pinsData[i].author.avatar;
-  img.alt = pinsData[i].offer.title;
-  mapPins.appendChild(newPin);
-}
+  newPin.style.left = pin.location.x - PIN_WIDTH / 2 + 'px';
+  newPin.style.top = pin.location.y - PIN_HEIGHT + 'px';
+  img.src = pin.author.avatar;
+  img.alt = pin.offer.title;
+  return newPin;
+};
+
+var createPins = function (pins) {
+  var pinsList = document.createDocumentFragment();
+
+  for (var i = 0; i < pins.length; i++) {
+    pinsList.appendChild(createPin(pins[i]));
+  }
+
+  mapPins.appendChild(pinsList);
+  return pinsList;
+};
+
+createPins(pinsData);
