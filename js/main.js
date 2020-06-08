@@ -67,7 +67,6 @@ var createPinList = function (pins) {
   }
 
   mapPins.appendChild(pinsList);
-  return pinsList;
 };
 
 createPinList(pinsData);
