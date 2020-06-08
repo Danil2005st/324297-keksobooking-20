@@ -59,7 +59,7 @@ var createPin = function (pin) {
   return newPin;
 };
 
-var createPins = function (pins) {
+var createPinList = function (pins) {
   var pinsList = document.createDocumentFragment();
 
   for (var i = 0; i < pins.length; i++) {
@@ -70,4 +70,4 @@ var createPins = function (pins) {
   return pinsList;
 };
 
-createPins(pinsData);
+createPinList(pinsData);
