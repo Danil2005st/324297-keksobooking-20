@@ -14,8 +14,7 @@ var photos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.g
 var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
 var mapCard = document.querySelector('#card').content.querySelector('.map__card');
 
-
-var getRandomInteger = function(min, max) {
+var getRandomInteger = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };
 
@@ -47,43 +46,40 @@ var createData = function () {
     obj.location = locationObj;
     data.push(obj);
   }
+
   return data;
 };
 
-var pinsData = createData();
-
 var firstCardInfo = pinsData[0];
 
-var getCardType = function(item) {
+var getCardType = function (item) {
   var message = '';
-  if(item === 'flat') {
+  if (item === 'flat') {
     message = 'Квартира';
-  } else if(item === 'bungalo') {
+  } else if (item === 'bungalo') {
     message = 'Бунгало';
-  } else if(item === 'house') {
+  } else if (item === 'house') {
     message = 'Дом';
-  } else if(item === 'palace') {
+  } else if (item === 'palace') {
     message = 'Дворец';
   }
   return message;
 };
 
-var getCardFeaturese = function(items) {
+var getCardFeaturese = function (items) {
   var featuresList = document.createDocumentFragment();
 
-  for(var i=0; i<items.length;i++) {
+  for (var i = 0; i < items.length; i++) {
     var featuresListItem = document.createElement('li');
     featuresListItem.classList.add('popup__feature');
     featuresListItem.classList.add('popup__feature--' + items[i]);
     featuresList.appendChild(featuresListItem);
   }
 
-  console.log(featuresList);
-
   return featuresList;
 };
 
-var getCardInfo = function(item) {
+var getCardInfo = function (item) {
   var newCard = mapCard.cloneNode(true);
   var cardTitle = newCard.querySelector('.popup__title');
   var cardAddress = newCard.querySelector('.popup__text--address');
@@ -93,12 +89,6 @@ var getCardInfo = function(item) {
   var cardCheckTime = newCard.querySelector('.popup__text--time');
   var cardFeaturese = newCard.querySelector('.popup__features');
 
-
-
-
-
-
-
   cardTitle.textContent = item.offer.title;
   cardAddress.textContent = item.offer.address;
   cardPrice.textContent = item.offer.price + '₽/ночь';
@@ -107,23 +97,31 @@ var getCardInfo = function(item) {
   cardCheckTime.textContent = 'Заезд после ' + item.offer.checkin + ', выезд до ' + item.offer.checkout;
   cardFeaturese.appendChild(getCardFeaturese(item.offer.features));
 
-
-
   mapFilters.before(newCard);
 };
 
+var pinsData = createData();
 
-
-getCardInfo(firstCardInfo);
-
-map.classList.remove('map--faded');
-
-for (var i = 0; i < pinsData.length; i++) {
+var createPin = function (pin) {
   var newPin = mapPin.cloneNode(true);
   var img = newPin.querySelector('img');
-  newPin.style.left = pinsData[i].location.x - PIN_WIDTH / 2 + 'px';
-  newPin.style.top = pinsData[i].location.y - PIN_HEIGHT + 'px';
-  img.src = pinsData[i].author.avatar;
-  img.alt = pinsData[i].offer.title;
-  mapPins.appendChild(newPin);
-}
+  newPin.style.left = pin.location.x - PIN_WIDTH / 2 + 'px';
+  newPin.style.top = pin.location.y - PIN_HEIGHT + 'px';
+  img.src = pin.author.avatar;
+  img.alt = pin.offer.title;
+  return newPin;
+};
+
+var createPinList = function (pins) {
+  var pinsList = document.createDocumentFragment();
+
+  for (var i = 0; i < pins.length; i++) {
+    pinsList.appendChild(createPin(pins[i]));
+  }
+
+  mapPins.appendChild(pinsList);
+};
+
+createPinList(pinsData);
+getCardInfo(firstCardInfo);
+map.classList.remove('map--faded');
