@@ -49,7 +49,7 @@ var createData = function () {
 };
 var pinsData = createData();
 
-var createPin = function (pin) {
+var createPinElement = function (pin) {
   var newPin = mapPin.cloneNode(true);
   var img = newPin.querySelector('img');
   newPin.style.left = pin.location.x - PIN_WIDTH / 2 + 'px';
@@ -59,14 +59,14 @@ var createPin = function (pin) {
   return newPin;
 };
 
-var insertPinList = function (pins) {
+var insertPins = function (pins) {
   var pinsList = document.createDocumentFragment();
 
   for (var i = 0; i < pins.length; i++) {
-    pinsList.appendChild(createPin(pins[i]));
+    pinsList.appendChild(createPinElement(pins[i]));
   }
 
   mapPins.appendChild(pinsList);
 };
 
-insertPinList(pinsData);
+insertPins(pinsData);
