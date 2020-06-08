@@ -50,8 +50,6 @@ var createData = function () {
   return data;
 };
 
-var firstCardInfo = pinsData[0];
-
 var getCardType = function (item) {
   var message = '';
   if (item === 'flat') {
@@ -79,6 +77,17 @@ var getCardFeaturese = function (items) {
   return featuresList;
 };
 
+var getCardPhotos = function (photosData, photo) {
+  var photosList = document.createDocumentFragment();
+
+  for (var i = 0; i < photosData.length; i++) {
+    var cardPhoto = photo.cloneNode(true);
+    cardPhoto.src = photosData[i];
+    photosList.appendChild(cardPhoto);
+  }
+  return photosList;
+};
+
 var getCardInfo = function (item) {
   var newCard = mapCard.cloneNode(true);
   var cardTitle = newCard.querySelector('.popup__title');
@@ -88,21 +97,80 @@ var getCardInfo = function (item) {
   var cardCapacity = newCard.querySelector('.popup__text--capacity');
   var cardCheckTime = newCard.querySelector('.popup__text--time');
   var cardFeaturese = newCard.querySelector('.popup__features');
+  var cardDescription = newCard.querySelector('.popup__description');
+  var cardPhotos = newCard.querySelector('.popup__photos');
+  var cardPhoto = cardPhotos.querySelector('img');
+  var avatarPhoto = newCard.querySelector('.popup__avatar');
 
-  cardTitle.textContent = item.offer.title;
-  cardAddress.textContent = item.offer.address;
-  cardPrice.textContent = item.offer.price + '₽/ночь';
-  cardType.textContent = getCardType(item.offer.type);
-  cardCapacity.textContent = item.offer.rooms + ' комнаты для ' + item.offer.guests + ' гостей';
-  cardCheckTime.textContent = 'Заезд после ' + item.offer.checkin + ', выезд до ' + item.offer.checkout;
-  cardFeaturese.appendChild(getCardFeaturese(item.offer.features));
+  if (item.offer.title.length !== null) {
+    cardTitle.textContent = item.offer.title;
+  } else {
+    cardTitle.classList.add('visually-hidden');
+  }
+
+  if (item.offer.address.length !== null) {
+    cardAddress.textContent = item.offer.address;
+  } else {
+    cardAddress.classList.add('visually-hidden');
+  }
+
+  if (item.offer.price !== null) {
+    cardPrice.textContent = item.offer.price + '₽/ночь';
+  } else {
+    cardPrice.classList.add('visually-hidden');
+  }
+
+  if (item.offer.type !== null) {
+    cardType.textContent = getCardType(item.offer.type);
+  } else {
+    cardType.add('visually-hidden');
+  }
+
+  if (item.offer.rooms !== null || item.offer.guests !== null) {
+    cardCapacity.textContent = item.offer.rooms + ' комнаты для ' + item.offer.guests + ' гостей';
+  } else {
+    cardCapacity.add('visually-hidden');
+  }
+
+  if (item.offer.checkin !== null || item.offer.checkout !== null) {
+    cardCheckTime.textContent = 'Заезд после ' + item.offer.checkin + ', выезд до ' + item.offer.checkout;
+  } else {
+    cardCheckTime.add('visually-hidden');
+  }
+
+  if (item.offer.features !== null) {
+    cardFeaturese.textContent = '';
+    cardFeaturese.appendChild(getCardFeaturese(item.offer.features));
+  } else {
+    cardFeaturese.add('visually-hidden');
+  }
+
+  if (item.offer.description !== null) {
+    cardPhotos.textContent = '';
+    cardPhotos.appendChild(getCardPhotos(item.offer.photos, cardPhoto));
+  } else {
+    cardPhotos.add('visually-hidden');
+  }
+
+  if (item.offer.description !== null) {
+    cardDescription.textContent = item.offer.description;
+  } else {
+    cardDescription.add('visually-hidden');
+  }
+
+  if (item.author.avatar !== null) {
+    avatarPhoto.src = item.author.avatar;
+  } else {
+    avatarPhoto.add('visually-hidden');
+  }
 
   mapFilters.before(newCard);
 };
 
 var pinsData = createData();
+var firstCardInfo = pinsData[0];
 
-var createPin = function (pin) {
+var createPinElement = function (pin) {
   var newPin = mapPin.cloneNode(true);
   var img = newPin.querySelector('img');
   newPin.style.left = pin.location.x - PIN_WIDTH / 2 + 'px';
@@ -112,16 +180,16 @@ var createPin = function (pin) {
   return newPin;
 };
 
-var createPinList = function (pins) {
+var insertPins = function (pins) {
   var pinsList = document.createDocumentFragment();
 
   for (var i = 0; i < pins.length; i++) {
-    pinsList.appendChild(createPin(pins[i]));
+    pinsList.appendChild(createPinElement(pins[i]));
   }
 
   mapPins.appendChild(pinsList);
 };
 
-createPinList(pinsData);
+insertPins(pinsData);
 getCardInfo(firstCardInfo);
 map.classList.remove('map--faded');
