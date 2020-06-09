@@ -52,14 +52,19 @@ var createData = function () {
 
 var getCardType = function (item) {
   var message = '';
-  if (item === 'flat') {
-    message = 'Квартира';
-  } else if (item === 'bungalo') {
-    message = 'Бунгало';
-  } else if (item === 'house') {
-    message = 'Дом';
-  } else if (item === 'palace') {
-    message = 'Дворец';
+  switch (item) {
+    case 'flat':
+      message = 'Квартира';
+      break;
+    case 'bungalo':
+      message = 'Бунгало';
+      break;
+    case 'house':
+      message = 'Дом';
+      break;
+    case 'palace':
+      message = 'Дворец';
+      break;
   }
   return message;
 };
@@ -163,8 +168,11 @@ var getCardInfo = function (item) {
   } else {
     avatarPhoto.add('visually-hidden');
   }
+  return newCard;
+};
 
-  mapFilters.before(newCard);
+var insertCardInfo = function (firstCardInfo) {
+  mapFilters.before(getCardInfo(firstCardInfo));
 };
 
 var pinsData = createData();
@@ -192,4 +200,5 @@ var insertPins = function (pins) {
 
 insertPins(pinsData);
 getCardInfo(firstCardInfo);
+insertCardInfo(firstCardInfo);
 map.classList.remove('map--faded');
