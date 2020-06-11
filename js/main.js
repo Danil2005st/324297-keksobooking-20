@@ -3,6 +3,11 @@ var Y_MIN = 130;
 var Y_MAX = 630;
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
+var MAIN_PIN_WIDTH = 65;
+var MAIN_PIN_HEIGHT = 65;
+var MAIN_PIN_ARROW_HEIGHT = 22;
+
+
 var map = document.querySelector('.map');
 var mapPins = map.querySelector('.map__pins');
 var mapFilters = map.querySelector('.map__filters-container');
@@ -51,22 +56,12 @@ var createData = function () {
 };
 
 var getCardType = function (item) {
-  var message = '';
   switch (item) {
-    case 'flat':
-      message = 'Квартира';
-      break;
-    case 'bungalo':
-      message = 'Бунгало';
-      break;
-    case 'house':
-      message = 'Дом';
-      break;
-    case 'palace':
-      message = 'Дворец';
-      break;
+    case 'flat': return 'Квартира';
+    case 'bungalo': return 'Бунгало';
+    case 'house': return 'Дом';
+    case 'palace': return 'Дворец';
   }
-  return message;
 };
 
 var getCardFeaturese = function (items) {
@@ -198,7 +193,62 @@ var insertPins = function (pins) {
   mapPins.appendChild(pinsList);
 };
 
-insertPins(pinsData);
-getCardInfo(firstCardInfo);
-insertCardInfo(firstCardInfo);
-map.classList.remove('map--faded');
+
+//getCardInfo(firstCardInfo);
+//insertCardInfo(firstCardInfo);
+
+
+var infoForm = document.querySelector('.ad-form');
+var infoFormBlocks = infoForm.querySelectorAll('fieldset');
+var infoFormAddress = infoForm.querySelector('#address');
+var mapForm = document.querySelector('.map__filters');
+var mapFormSelects = mapForm.querySelectorAll('select');
+var mapFormBlocks = mapForm.querySelectorAll('fieldset');
+var mainMapPin = document.querySelector('.map__pin--main');
+
+var putDisabled = function(elements){
+  elements.forEach(element => {
+    element.setAttribute("disabled", "");
+  });
+}
+
+var removeDisabled = function(elements){
+  elements.forEach(element => {
+    element.removeAttribute("disabled");
+  });
+}
+
+putDisabled(infoFormBlocks);
+putDisabled(mapFormSelects);
+putDisabled(mapFormBlocks);
+
+var getСoordinatesMainPin = function(pin,isPageActive){
+  var top = pin.style.top.replace('px', '');
+  var left = pin.style.left.replace('px', '');
+  if(isPageActive) {
+    var mainPinСoordinates = Math.ceil(left - MAIN_PIN_WIDTH/2) + ', ' + Math.ceil(top - MAIN_PIN_HEIGHT - MAIN_PIN_ARROW_HEIGHT );
+  } else {
+    var mainPinСoordinates = Math.ceil(left - MAIN_PIN_WIDTH/2) + ', ' + Math.ceil(top - MAIN_PIN_HEIGHT/2 );
+  }
+  return (mainPinСoordinates);
+}
+
+infoFormAddress.value = getСoordinatesMainPin(mainMapPin, false);
+
+var activatePage = function(evt) {
+  if(evt.button === 0 ||  evt.key === 'Enter'){
+    removeDisabled(infoFormBlocks);
+    removeDisabled(mapFormSelects);
+    removeDisabled(mapFormBlocks);
+    insertPins(pinsData);
+    map.classList.remove('map--faded');
+    infoForm.classList.remove('ad-form--disabled');
+    infoFormAddress.value = getСoordinatesMainPin(mainMapPin, true);
+
+    mainMapPin.removeEventListener('mousedown', activatePage);
+    mainMapPin.removeEventListener('keydown', activatePage);
+  }
+}
+
+mainMapPin.addEventListener('mousedown', activatePage);
+mainMapPin.addEventListener('keydown', activatePage);
