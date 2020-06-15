@@ -49,3 +49,4 @@
   infoFormCapacity.addEventListener('change', validateRooms);
   // infoFormTitle.addEventListener('input', validateTitle);
 })();
+

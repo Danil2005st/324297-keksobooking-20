@@ -25,7 +25,7 @@ var activateElements = function () {
   setDisabled(mapFormBlocks, false);
   map.classList.remove('map--faded');
   infoForm.classList.remove('ad-form--disabled');
-  infoFormAddress.value = window.pin.getСoordinatesMainPin(mainMapPin, true);
+  infoFormAddress.value = window.pin.getCoordinatesMainPin(mainMapPin, true);
 };
 
 var activatePage = function () {
@@ -39,6 +39,6 @@ var activatePage = function () {
 setDisabled(infoFormBlocks, true);
 setDisabled(mapFormSelects, true);
 setDisabled(mapFormBlocks, true);
-infoFormAddress.value = window.pin.getСoordinatesMainPin(mainMapPin, false);
+infoFormAddress.value = window.pin.getCoordinatesMainPin(mainMapPin, false);
 mainMapPin.addEventListener('click', activatePage);
 

@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-
-
   var map = document.querySelector('.map');
   var mapFilters = map.querySelector('.map__filters-container');
   var mapCard = document.querySelector('#card').content.querySelector('.map__card');
@@ -136,5 +134,5 @@
       mapFilters.before(getCardInfo(window.data[i], i));
     }
   };
-
 })();
+

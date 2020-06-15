@@ -27,5 +27,5 @@
 
     mapPins.appendChild(pinsList);
   };
-
 })();
+

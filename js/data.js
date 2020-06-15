@@ -41,3 +41,4 @@
     window.data.push(obj);
   }
 })();
+
