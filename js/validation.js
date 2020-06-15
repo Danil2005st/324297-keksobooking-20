@@ -5,8 +5,8 @@
   var infoFormRoomNumber = infoForm.querySelector('#room_number');
   var infoFormCapacity = infoForm.querySelector('#capacity');
 
-  var infoFormTitle = infoForm.querySelector('#title');
-  /* var infoFormType = infoForm.querySelector('#type');
+  /* var infoFormTitle = infoForm.querySelector('#title');
+  var infoFormType = infoForm.querySelector('#type');
   var infoFormPrice = infoForm.querySelector('#price');
   var infoFormAQddress = infoForm.querySelector('#address');
   var infoFormTimein = infoForm.querySelector('#timein');
@@ -31,8 +31,7 @@
     }
   };
 
-  var validateTitle = function () {
-
+  /* var validateTitle = function () {
     if (infoFormTitle.value.length < 30) {
       infoFormCapacity.setCustomValidity('Длина заголовка должна быть больше 30 символов');
     } else if (infoFormTitle.value.length >= 100) {
@@ -40,10 +39,10 @@
     } else {
       infoFormCapacity.setCustomValidity('');
     }
-  };
+  };*/
 
-  var infoFormRoomNumber = infoForm.querySelector('#room_number');
-  var infoFormCapacity = infoForm.querySelector('#capacity');
+  // var infoFormRoomNumber = infoForm.querySelector('#room_number');
+  // var infoFormCapacity = infoForm.querySelector('#capacity');
 
   validateRooms();
   infoFormRoomNumber.addEventListener('change', validateRooms);
