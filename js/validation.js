@@ -5,14 +5,10 @@
   var infoFormRoomNumber = infoForm.querySelector('#room_number');
   var infoFormCapacity = infoForm.querySelector('#capacity');
 
-  /* var infoFormTitle = infoForm.querySelector('#title');
   var infoFormType = infoForm.querySelector('#type');
   var infoFormPrice = infoForm.querySelector('#price');
-  var infoFormAQddress = infoForm.querySelector('#address');
   var infoFormTimein = infoForm.querySelector('#timein');
   var infoFormTimeout = infoForm.querySelector('#timeout');
-  var infoFormAvatar = infoForm.querySelector('#avatar');
-  var infoFormImages = infoForm.querySelector('#images');*/
 
   var validateRooms = function () {
     var rooms = Number(infoFormRoomNumber.value);
@@ -31,22 +27,45 @@
     }
   };
 
-  /* var validateTitle = function () {
-    if (infoFormTitle.value.length < 30) {
-      infoFormCapacity.setCustomValidity('Длина заголовка должна быть больше 30 символов');
-    } else if (infoFormTitle.value.length >= 100) {
-      infoFormCapacity.setCustomValidity('Длина заголовка должна быть меньше 100 символов');
-    } else {
-      infoFormCapacity.setCustomValidity('');
+  var changePriceRoom = function () {
+    var pricePerNight;
+    switch (infoFormType.value) {
+      case 'flat':
+        pricePerNight = 10000;
+        break;
+      case 'bungalo':
+        pricePerNight = 0;
+        break;
+      case 'house':
+        pricePerNight = 5000;
+        break;
+      case 'palace':
+        pricePerNight = 10000;
+        break;
     }
-  };*/
+    infoFormPrice.setAttribute('min', pricePerNight);
+    infoFormPrice.setAttribute('placeholder', pricePerNight);
+  };
 
-  // var infoFormRoomNumber = infoForm.querySelector('#room_number');
-  // var infoFormCapacity = infoForm.querySelector('#capacity');
+  var changeTime = function (timeFirst, timeSecond) {
+    var options = timeFirst.getElementsByTagName('option');
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value === timeSecond.value) {
+        options[i].selected = true;
+      }
+    }
+  };
 
   validateRooms();
+  changePriceRoom();
   infoFormRoomNumber.addEventListener('change', validateRooms);
   infoFormCapacity.addEventListener('change', validateRooms);
-  // infoFormTitle.addEventListener('input', validateTitle);
+  infoFormType.addEventListener('change', changePriceRoom);
+  infoFormTimein.addEventListener('change', function () {
+    changeTime(infoFormTimeout, infoFormTimein);
+  });
+  infoFormTimeout.addEventListener('change', function () {
+    changeTime(infoFormTimein, infoFormTimeout);
+  });
 })();
 
