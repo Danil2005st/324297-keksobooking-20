@@ -48,7 +48,7 @@
     return photosList;
   };
 
-  var getCardInfo = function (item, index) {
+  var getCardInfo = function (item) {
     var newCard = mapCard.cloneNode(true);
     var cardTitle = newCard.querySelector('.popup__title');
     var cardAddress = newCard.querySelector('.popup__text--address');
@@ -61,9 +61,6 @@
     var cardPhotos = newCard.querySelector('.popup__photos');
     var cardPhoto = cardPhotos.querySelector('img');
     var avatarPhoto = newCard.querySelector('.popup__avatar');
-
-    newCard.classList.add('hidden');
-    newCard.setAttribute('data-opener-popup', index);
 
     if (item.offer.title.length !== null) {
       cardTitle.textContent = item.offer.title;
@@ -129,10 +126,7 @@
     return newCard;
   };
 
-  window.cards = function () {
-    for (var i = 0; i < 8; i++) {
-      mapFilters.before(getCardInfo(window.data[i], i));
-    }
+  window.getCards = function (data) {
+    mapFilters.before(getCardInfo(data));
   };
 })();
-

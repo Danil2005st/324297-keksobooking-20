@@ -1,21 +1,17 @@
 'use strict';
 
 (function () {
-  var hiddenClass = 'hidden';
   var filterChangeHandler = function (pinElement) {
+
     pinElement.addEventListener('click', function () {
-      var collectionPopup = document.querySelectorAll('[data-opener-popup]');
-      var pinElementIndex = pinElement.getAttribute('data-opener');
-
-      for (var i = 0; i < collectionPopup.length; i++) {
-        collectionPopup[i].classList.add(hiddenClass);
+      var popup = document.querySelector('.map__card');
+      if (popup) {
+        popup.remove();
       }
-
-      var popup = document.querySelector('[data-opener-popup="' + pinElementIndex + '"]');
-      popup.classList.remove(hiddenClass);
-
+      var pinElementIndex = pinElement.getAttribute('data-opener');
+      window.getCards(window.data[pinElementIndex]);
       popup.querySelector('.popup__close').addEventListener('click', function () {
-        popup.classList.add(hiddenClass);
+        popup.remove();
       });
     });
   };
@@ -29,4 +25,3 @@
     }
   };
 })();
-

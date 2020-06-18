@@ -5,7 +5,7 @@
   var MAIN_PIN_HEIGHT = 65;
   var MAIN_PIN_ARROW_HEIGHT = 22;
 
-  window.pin = {
+  window.getPinPosition = {
     getCoordinatesMainPin: function (pin, isPageActive) {
       var top = pin.style.top.replace('px', '');
       var left = pin.style.left.replace('px', '');
@@ -16,4 +16,3 @@
     }
   };
 })();
-

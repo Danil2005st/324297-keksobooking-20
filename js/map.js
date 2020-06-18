@@ -18,7 +18,7 @@
     return newPin;
   };
 
-  window.mapPins = function (pins) {
+  window.createMapPins = function (pins) {
     var pinsList = document.createDocumentFragment();
 
     for (var i = 0; i < pins.length; i++) {
@@ -28,4 +28,3 @@
     mapPins.appendChild(pinsList);
   };
 })();
-

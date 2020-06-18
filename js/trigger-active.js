@@ -25,13 +25,12 @@ var activateElements = function () {
   setDisabled(mapFormBlocks, false);
   map.classList.remove('map--faded');
   infoForm.classList.remove('ad-form--disabled');
-  infoFormAddress.value = window.pin.getCoordinatesMainPin(mainMapPin, true);
+  infoFormAddress.value = window.getPinPosition.getCoordinatesMainPin(mainMapPin, true);
 };
 
 var activatePage = function () {
   activateElements();
-  window.mapPins(window.data);
-  window.cards(window.data);
+  window.createMapPins(window.data);
   window.popup.onPinClick();
   mainMapPin.removeEventListener('click', activatePage);
 };
@@ -39,6 +38,5 @@ var activatePage = function () {
 setDisabled(infoFormBlocks, true);
 setDisabled(mapFormSelects, true);
 setDisabled(mapFormBlocks, true);
-infoFormAddress.value = window.pin.getCoordinatesMainPin(mainMapPin, false);
+infoFormAddress.value = window.getPinPosition.getCoordinatesMainPin(mainMapPin, false);
 mainMapPin.addEventListener('click', activatePage);
-
