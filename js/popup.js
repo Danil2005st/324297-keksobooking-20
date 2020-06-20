@@ -9,7 +9,8 @@
         popup.remove();
       }
       var pinElementIndex = pinElement.getAttribute('data-opener');
-      window.getCards(window.data[pinElementIndex]);
+
+      window.insertCards(window.data[pinElementIndex]);
       popup.querySelector('.popup__close').addEventListener('click', function () {
         popup.remove();
       });

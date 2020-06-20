@@ -126,7 +126,7 @@
     return newCard;
   };
 
-  window.getCards = function (data) {
+  window.insertCards = function (data) {
     mapFilters.before(getCardInfo(data));
   };
 })();

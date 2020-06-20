@@ -15,6 +15,13 @@
     newPin.style.top = pin.location.y - PIN_HEIGHT + 'px';
     img.src = pin.author.avatar;
     img.alt = pin.offer.title;
+
+
+    newPin.addEventListener('click', function () {
+      console.log(pin);
+     //window.insertCards(pin);
+    });
+
     return newPin;
   };
 
