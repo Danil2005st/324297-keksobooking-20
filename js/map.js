@@ -18,8 +18,7 @@
 
 
     newPin.addEventListener('click', function () {
-      console.log(pin);
-     //window.insertCards(pin);
+      window.insertCards(pin);
     });
 
     return newPin;
