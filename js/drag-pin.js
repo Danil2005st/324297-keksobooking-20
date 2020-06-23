@@ -49,7 +49,6 @@
       } else {
         mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
       }
-
     };
 
     addressField.value = window.getPinPosition.getCoordinatesMainPin(mainPin, false);

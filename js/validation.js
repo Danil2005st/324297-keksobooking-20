@@ -4,7 +4,6 @@
   var infoForm = document.querySelector('.ad-form');
   var infoFormRoomNumber = infoForm.querySelector('#room_number');
   var infoFormCapacity = infoForm.querySelector('#capacity');
-
   var infoFormType = infoForm.querySelector('#type');
   var infoFormPrice = infoForm.querySelector('#price');
   var infoFormTimein = infoForm.querySelector('#timein');

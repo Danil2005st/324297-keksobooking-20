@@ -31,7 +31,6 @@ var activateElements = function () {
 var activatePage = function () {
   activateElements();
   window.createMapPins(window.data);
-  window.popup.onPinClick();
   mainMapPin.removeEventListener('click', activatePage);
 };
 

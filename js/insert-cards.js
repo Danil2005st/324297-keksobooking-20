@@ -126,30 +126,7 @@
     return newCard;
   };
 
-  var filterChangeHandler = function (pinElement) {
-    pinElement.addEventListener('click', function () {
-      var popup = document.querySelector('.map__card');
-
-      if (popup) {
-        popup.remove();
-      }
-
-      popup.querySelector('.popup__close').addEventListener('click', function () {
-        popup.remove();
-      });
-    });
-  };
-
   window.insertCards = function (data) {
     mapFilters.before(getCardInfo(data));
-  };
-
-  window.popup = {
-    onPinClick: function () {
-      var pinsCollection = document.querySelectorAll('[data-opener]');
-      for (var i = 0; i < pinsCollection.length; i++) {
-        filterChangeHandler(pinsCollection[i]);
-      }
-    }
   };
 })();

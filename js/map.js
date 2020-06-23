@@ -16,9 +16,10 @@
     img.src = pin.author.avatar;
     img.alt = pin.offer.title;
 
-
     newPin.addEventListener('click', function () {
+      window.openCloseCards.onPinClickOpen();
       window.insertCards(pin);
+      window.openCloseCards.onPinClickClose();
     });
 
     return newPin;
