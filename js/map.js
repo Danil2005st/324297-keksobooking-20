@@ -35,3 +35,4 @@
     mapPins.appendChild(pinsList);
   };
 })();
+
