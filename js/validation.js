@@ -67,4 +67,3 @@
     changeTime(infoFormTimein, infoFormTimeout);
   });
 })();
-
