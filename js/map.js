@@ -27,8 +27,16 @@
 
   window.createMapPins = function (pins) {
     var pinsList = document.createDocumentFragment();
+    var MAX_PINS_COUNT = 8;
+    var pinsLength;
 
-    for (var i = 0; i < pins.length; i++) {
+    if(pins.length > MAX_PINS_COUNT ) {
+      pinsLength = MAX_PINS_COUNT;
+    } else {
+      pinsLength = pins.length;
+    }
+
+    for (var i = 0; i < pinsLength; i++) {
       pinsList.appendChild(createPinElement(pins[i], i));
     }
 

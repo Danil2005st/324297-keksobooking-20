@@ -30,7 +30,7 @@ var activateElements = function () {
 
 var activatePage = function () {
   activateElements();
-  window.createMapPins(window.data);
+  window.createMapPins(window.xhrData);
   mainMapPin.removeEventListener('click', activatePage);
 };
 
