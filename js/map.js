@@ -30,7 +30,7 @@
     var MAX_PINS_COUNT = 8;
     var pinsLength;
 
-    if(pins.length > MAX_PINS_COUNT ) {
+    if (pins.length > MAX_PINS_COUNT) {
       pinsLength = MAX_PINS_COUNT;
     } else {
       pinsLength = pins.length;
