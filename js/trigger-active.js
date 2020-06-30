@@ -30,8 +30,16 @@ var activateElements = function () {
 
 var activatePage = function () {
   activateElements();
-  window.createMapPins(window.xhrData);
+  window.load(onSuccess, onError);
   mainMapPin.removeEventListener('click', activatePage);
+};
+
+var onSuccess = function (data) {
+  window.createMapPins(data);
+};
+
+var onError = function (message) {
+  console.log(message);
 };
 
 setDisabled(infoFormBlocks, true);
