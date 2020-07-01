@@ -17,9 +17,7 @@
     img.alt = pin.offer.title;
 
     newPin.addEventListener('click', function () {
-      window.openCloseCards.onPinClickOpen();
-      window.insertCards(pin);
-      window.openCloseCards.onPinClickClose();
+      window.card.open(pin);
     });
 
     return newPin;
@@ -43,4 +41,3 @@
     mapPins.appendChild(pinsList);
   };
 })();
-

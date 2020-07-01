@@ -38,8 +38,8 @@ var onSuccess = function (data) {
   window.createMapPins(data);
 };
 
-var onError = function (message) {
-  console.log(message);
+var onError = function () {
+  //alert(message);
 };
 
 setDisabled(infoFormBlocks, true);

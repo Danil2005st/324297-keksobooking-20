@@ -48,7 +48,7 @@
     return photosList;
   };
 
-  var getCardInfo = function (item) {
+  var createElement = function (item) {
     var newCard = mapCard.cloneNode(true);
     var cardTitle = newCard.querySelector('.popup__title');
     var cardAddress = newCard.querySelector('.popup__text--address');
@@ -62,71 +62,93 @@
     var cardPhoto = cardPhotos.querySelector('img');
     var avatarPhoto = newCard.querySelector('.popup__avatar');
 
-    if (item.offer.title.length !== null) {
+    if (item.offer.title) {
       cardTitle.textContent = item.offer.title;
     } else {
       cardTitle.classList.add('visually-hidden');
     }
 
-    if (item.offer.address.length !== null) {
+    if (item.offer.address) {
       cardAddress.textContent = item.offer.address;
     } else {
       cardAddress.classList.add('visually-hidden');
     }
 
-    if (item.offer.price !== null) {
+    if (item.offer.price) {
       cardPrice.textContent = item.offer.price + '₽/ночь';
     } else {
       cardPrice.classList.add('visually-hidden');
     }
 
-    if (item.offer.type !== null) {
+    if (item.offer.type) {
       cardType.textContent = getCardType(item.offer.type);
     } else {
-      cardType.add('visually-hidden');
+      cardType.classList.add('visually-hidden');
     }
 
-    if (item.offer.rooms !== null || item.offer.guests !== null) {
+    if (item.offer.rooms !== 0 || item.offer.guests !== 0) {
       cardCapacity.textContent = item.offer.rooms + ' комнаты для ' + item.offer.guests + ' гостей';
     } else {
-      cardCapacity.add('visually-hidden');
+      cardCapacity.classList.add('visually-hidden');
     }
 
-    if (item.offer.checkin !== null || item.offer.checkout !== null) {
+    if (item.offer.checkin || item.offer.checkout) {
       cardCheckTime.textContent = 'Заезд после ' + item.offer.checkin + ', выезд до ' + item.offer.checkout;
     } else {
-      cardCheckTime.add('visually-hidden');
+      cardCheckTime.classList.add('visually-hidden');
     }
 
-    if (item.offer.features !== null) {
+    if (item.offer.features) {
       cardFeaturese.textContent = '';
       cardFeaturese.appendChild(getCardFeaturese(item.offer.features));
     } else {
-      cardFeaturese.add('visually-hidden');
+      cardFeaturese.classList.add('visually-hidden');
     }
 
-    if (item.offer.description !== null) {
+    if (item.offer.photos) {
       cardPhotos.textContent = '';
       cardPhotos.appendChild(getCardPhotos(item.offer.photos, cardPhoto));
     } else {
-      cardPhotos.add('visually-hidden');
+      cardPhotos.classList.add('visually-hidden');
     }
 
-    if (item.offer.description !== null) {
+    if (item.offer.description) {
       cardDescription.textContent = item.offer.description;
     } else {
-      cardDescription.add('visually-hidden');
+      cardDescription.classList.add('visually-hidden');
     }
 
-    if (item.author.avatar !== null) {
+    if (item.author.avatar) {
       avatarPhoto.src = item.author.avatar;
     } else {
-      avatarPhoto.add('visually-hidden');
+      avatarPhoto.classList.add('visually-hidden');
     }
     return newCard;
   };
 
-  window.insertCards = function (data) {
-    mapFilters.before(getCardInfo(data));
+  var onEscPress = function () {
+    close();
+  };
+
+  var open = function (data) {
+    var cardElement = createElement(data);
+    cardElement.querySelector('.popup__close').addEventListener('click', function () {
+      close();
+    });
+    close();
+    mapFilters.before(cardElement);
+    document.addEventListener('keydown', onEscPress);
+  };
+
+  var close = function () {
+    var element = document.querySelector('.map__card');
+    if (element) {
+      element.remove();
+    }
+    document.removeEventListener('keydown', onEscPress);
+  };
+
+  window.card = {
+    open: open
   };
 })();
