@@ -8,6 +8,7 @@ var mapForm = document.querySelector('.map__filters');
 var mapFormSelects = mapForm.querySelectorAll('select');
 var mapFormBlocks = mapForm.querySelectorAll('fieldset');
 var mainMapPin = document.querySelector('.map__pin--main');
+var housingType = [];
 
 var setDisabled = function (list, value) {
   for (var i = 0; i < list.length; i++) {
@@ -34,7 +35,21 @@ var activatePage = function () {
   mainMapPin.removeEventListener('click', activatePage);
 };
 
+var updateHousingType = function () {
+
+  var housingTypePlace = housingType.filter(function(it) {
+
+    console.log(it.offer.type, '+++');
+
+    //return it.colorCoat === coatColor;
+  });
+}
+
 var onSuccess = function (data) {
+
+  housingType = data;
+  updateHousingType();
+
   window.createMapPins(data);
 };
 

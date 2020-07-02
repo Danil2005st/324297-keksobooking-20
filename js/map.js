@@ -25,7 +25,7 @@
 
   window.createMapPins = function (pins) {
     var pinsList = document.createDocumentFragment();
-    var MAX_PINS_COUNT = 8;
+    var MAX_PINS_COUNT = 5;
     var pinsLength;
 
     if (pins.length > MAX_PINS_COUNT) {
