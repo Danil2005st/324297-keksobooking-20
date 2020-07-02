@@ -17,9 +17,7 @@
     img.alt = pin.offer.title;
 
     newPin.addEventListener('click', function () {
-      window.openCloseCards.onPinClickOpen();
-      window.insertCards(pin);
-      window.openCloseCards.onPinClickClose();
+      window.card.open(pin);
     });
 
     return newPin;
@@ -27,8 +25,16 @@
 
   window.createMapPins = function (pins) {
     var pinsList = document.createDocumentFragment();
+    var MAX_PINS_COUNT = 8;
+    var pinsLength;
 
-    for (var i = 0; i < pins.length; i++) {
+    if (pins.length > MAX_PINS_COUNT) {
+      pinsLength = MAX_PINS_COUNT;
+    } else {
+      pinsLength = pins.length;
+    }
+
+    for (var i = 0; i < pinsLength; i++) {
       pinsList.appendChild(createPinElement(pins[i], i));
     }
 

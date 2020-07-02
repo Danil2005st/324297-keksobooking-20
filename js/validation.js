@@ -30,7 +30,7 @@
     var pricePerNight;
     switch (infoFormType.value) {
       case 'flat':
-        pricePerNight = 10000;
+        pricePerNight = 1000;
         break;
       case 'bungalo':
         pricePerNight = 0;
