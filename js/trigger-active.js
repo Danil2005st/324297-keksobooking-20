@@ -39,7 +39,6 @@ var onSuccess = function (data) {
 };
 
 var onError = function () {
-  //alert(message);
 };
 
 setDisabled(infoFormBlocks, true);
