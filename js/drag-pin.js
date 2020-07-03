@@ -8,10 +8,10 @@
   var MAIN_PIN_HEIGHT = 65;
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_ARROW_HEIGHT = 22;
-  var MAIN_PIN_MAX_TOP = 130 + MAIN_PIN_HEIGHT + MAIN_PIN_ARROW_HEIGHT;
-  var MAIN_PIN_MAX_BOTTOM = 630 + MAIN_PIN_HEIGHT + MAIN_PIN_ARROW_HEIGHT;
-  var MAIN_PIN_MIN_LEFT = 0;
-  var MAIN_PIN_MAX_LEFT = map.offsetWidth - MAIN_PIN_WIDTH;
+  var MAIN_PIN_MAX_TOP = 130 - MAIN_PIN_HEIGHT - MAIN_PIN_ARROW_HEIGHT;
+  var MAIN_PIN_MAX_BOTTOM = 630 - MAIN_PIN_HEIGHT - MAIN_PIN_ARROW_HEIGHT;
+  var MAIN_PIN_MIN_LEFT = 0 - MAIN_PIN_WIDTH / 2;
+  var MAIN_PIN_MAX_LEFT = map.offsetWidth - MAIN_PIN_WIDTH / 2;
 
   mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -49,10 +49,10 @@
       } else {
         mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
       }
-      addressField.value = window.getPinPosition.getCoordinatesMainPin(mainPin, true);
+      addressField.value = window.pins.getCoordinates(mainPin, true);
     };
 
-    addressField.value = window.getPinPosition.getCoordinatesMainPin(mainPin, false);
+    addressField.value = window.pins.getCoordinates(mainPin, false);
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();

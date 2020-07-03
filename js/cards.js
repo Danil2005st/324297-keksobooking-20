@@ -145,10 +145,12 @@
     if (element) {
       element.remove();
     }
+
     document.removeEventListener('keydown', onEscPress);
   };
 
   window.card = {
-    open: open
+    open: open,
+    close: close
   };
 })();

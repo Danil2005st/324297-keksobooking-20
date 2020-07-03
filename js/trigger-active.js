@@ -1,63 +1,51 @@
 'use strict';
 
-var map = document.querySelector('.map');
-var infoForm = document.querySelector('.ad-form');
-var infoFormBlocks = infoForm.querySelectorAll('fieldset');
-var infoFormAddress = infoForm.querySelector('#address');
-var mapForm = document.querySelector('.map__filters');
-var mapFormSelects = mapForm.querySelectorAll('select');
-var mapFormBlocks = mapForm.querySelectorAll('fieldset');
-var mainMapPin = document.querySelector('.map__pin--main');
-var housingType = [];
+(function () {
+  var map = document.querySelector('.map');
+  var infoForm = document.querySelector('.ad-form');
+  var infoFormBlocks = infoForm.querySelectorAll('fieldset');
+  var infoFormAddress = infoForm.querySelector('#address');
+  var mapForm = document.querySelector('.map__filters');
+  var mapFormSelects = mapForm.querySelectorAll('select');
+  var mapFormBlocks = mapForm.querySelectorAll('fieldset');
+  var mainMapPin = document.querySelector('.map__pin--main');
 
-var setDisabled = function (list, value) {
-  for (var i = 0; i < list.length; i++) {
-    if (value) {
-      list[i].setAttribute('disabled', '');
-    } else {
-      list[i].removeAttribute('disabled');
+  var setDisabled = function (list, value) {
+    for (var i = 0; i < list.length; i++) {
+      if (value) {
+        list[i].setAttribute('disabled', '');
+      } else {
+        list[i].removeAttribute('disabled');
+      }
     }
-  }
-};
+  };
 
-var activateElements = function () {
-  setDisabled(infoFormBlocks, false);
-  setDisabled(mapFormSelects, false);
-  setDisabled(mapFormBlocks, false);
-  map.classList.remove('map--faded');
-  infoForm.classList.remove('ad-form--disabled');
-  infoFormAddress.value = window.getPinPosition.getCoordinatesMainPin(mainMapPin, true);
-};
+  var activateElements = function () {
+    setDisabled(infoFormBlocks, false);
+    setDisabled(mapFormSelects, false);
+    setDisabled(mapFormBlocks, false);
+    map.classList.remove('map--faded');
+    infoForm.classList.remove('ad-form--disabled');
+    infoFormAddress.value = window.pins.getCoordinates(mainMapPin, true);
+  };
 
-var activatePage = function () {
-  activateElements();
-  window.load(onSuccess, onError);
-  mainMapPin.removeEventListener('click', activatePage);
-};
+  var activatePage = function () {
+    activateElements();
+    window.load(onSuccess, onError);
+    mainMapPin.removeEventListener('click', activatePage);
+  };
 
-var updateHousingType = function () {
+  var onSuccess = function (data) {
+    window.filter.onFilterChange(data);
+    window.createMapPins(data);
+  };
 
-  var housingTypePlace = housingType.filter(function(it) {
+  var onError = function () {
+  };
 
-    console.log(it.offer.type, '+++');
-
-    //return it.colorCoat === coatColor;
-  });
-}
-
-var onSuccess = function (data) {
-
-  housingType = data;
-  updateHousingType();
-
-  window.createMapPins(data);
-};
-
-var onError = function () {
-};
-
-setDisabled(infoFormBlocks, true);
-setDisabled(mapFormSelects, true);
-setDisabled(mapFormBlocks, true);
-infoFormAddress.value = window.getPinPosition.getCoordinatesMainPin(mainMapPin, false);
-mainMapPin.addEventListener('click', activatePage);
+  setDisabled(infoFormBlocks, true);
+  setDisabled(mapFormSelects, true);
+  setDisabled(mapFormBlocks, true);
+  infoFormAddress.value = window.pins.getCoordinates(mainMapPin, false);
+  mainMapPin.addEventListener('click', activatePage);
+})();
