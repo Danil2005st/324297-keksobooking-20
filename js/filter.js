@@ -2,8 +2,6 @@
 
 (function () {
   var formFilters = document.querySelector('.map__filters');
-
-
   var getFilterParams = function (data) {
     var formFilterType = formFilters.querySelector('#housing-type').value;
     var formFilterPrice = formFilters.querySelector('#housing-price').value;
@@ -11,11 +9,9 @@
     var formFilterGuests = formFilters.querySelector('#housing-guests').value;
     var formFilterFeatures = formFilters.querySelectorAll('#housing-features input:checked');
     var formFeaturesList = [];
-
     var PRICE_LOW = 10000;
     var PRICE_HIGH = 50000;
     var filteredCards = [];
-
 
     if (formFilterType !== 'any') {
       var sameTypeCards = data.filter(function (it) {
@@ -72,6 +68,8 @@
       });
     }
 
+    filteredCards = filteredCards.concat(data);
+
     var uniqueCards = filteredCards.filter(function (it, i) {
       return filteredCards.indexOf(it) === i;
     });
@@ -81,11 +79,11 @@
 
   window.filter = {
     onFilterChange: function (data) {
-      formFilters.addEventListener('change', function () {
+      formFilters.addEventListener('change', window.debounce(function () {
         window.pins.remove();
         window.card.close();
         window.createMapPins(getFilterParams(data));
-      });
+      }));
     }
   };
 })();
