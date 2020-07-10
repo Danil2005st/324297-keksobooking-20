@@ -8,6 +8,7 @@
   var formFilterGuests = formFilters.querySelector('#housing-guests');
 
   var formFeaturesList = [];
+  var anyValue = 'any';
   var PRICE_LOW = 10000;
   var PRICE_HIGH = 50000;
   var filteredCards = [];
@@ -20,17 +21,27 @@
     var formFilterFeatures = formFilters.querySelectorAll('#housing-features input:checked');
 
     for (var i = 0; i < data.length; i++) {
-      if (it.offer.type === typeValue) {
-        filteredCards = filteredCards.concat(data[i]);
-      }
-      formFeaturesList = formFeaturesList.concat(data[i]);
-      console.log(222, formFeaturesList);
-
-      if (priceValue === 'any') {
+      console.log(data[i]);
+      if (typeValue !== data[i].offer.type && typeValue === anyValue) {
         continue;
       }
+
+      if (priceValue === anyValue) {
+        var price = '';
+
+        if (data[i].offer.price <= PRICE_LOW) {
+          price = 'low';
+        } else if (data[i].offer.price >= PRICE_HIGH) {
+          price = 'high';
+        } else {
+          price = 'middle';
+        }
+
+
+        continue;
+      }
+
       formFeaturesList = formFeaturesList.concat(data[i]);
-      console.log(111, formFeaturesList);
     }
 
     /* if (typeValue !== 'any') {
