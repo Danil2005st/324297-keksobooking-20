@@ -126,8 +126,10 @@
     return newCard;
   };
 
-  var onEscPress = function () {
-    close();
+  var onEscPress = function (evt) {
+    if (evt.key === 'Escape') {
+      close();
+    }
   };
 
   var open = function (data) {

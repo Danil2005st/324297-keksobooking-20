@@ -8,6 +8,7 @@
   var infoFormPrice = infoForm.querySelector('#price');
   var infoFormTimein = infoForm.querySelector('#timein');
   var infoFormTimeout = infoForm.querySelector('#timeout');
+  var URL = 'https://javascript.pages.academy/keksobooking';
 
   var validateRooms = function () {
     var rooms = Number(infoFormRoomNumber.value);
@@ -55,6 +56,13 @@
     }
   };
 
+  var onSuccess = function () {
+    window.triggerActive.disactivateElements();
+  };
+
+  var onError = function () {
+  };
+
   validateRooms();
   changePriceRoom();
   infoFormRoomNumber.addEventListener('change', validateRooms);
@@ -65,5 +73,10 @@
   });
   infoFormTimeout.addEventListener('change', function () {
     changeTime(infoFormTimein, infoFormTimeout);
+  });
+  infoForm.addEventListener('submit', function (evt) {
+    var formData = new FormData(infoForm);
+    evt.preventDefault();
+    window.load(URL, onSuccess, onError, formData);
   });
 })();
