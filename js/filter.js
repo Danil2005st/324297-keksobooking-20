@@ -11,37 +11,65 @@
   var anyValue = 'any';
   var PRICE_LOW = 10000;
   var PRICE_HIGH = 50000;
-  var filteredCards = [];
 
   var getFilterParams = function (data) {
+    var filteredCards = [];
     var typeValue = formFilterType.value;
     var priceValue = formFilterPrice.value;
-    var roomsValue = formFilterRooms.value;
-    var guestsValue = formFilterGuests.value;
+    var roomsValue = Number(formFilterRooms.value);
+    var guestsValue = Number(formFilterGuests.value);
     var formFilterFeatures = formFilters.querySelectorAll('#housing-features input:checked');
+    var formFlagFeatures = false;
 
     for (var i = 0; i < data.length; i++) {
-      console.log(data[i]);
-      if (typeValue !== data[i].offer.type && typeValue === anyValue) {
-        continue;
+      if (typeValue !== anyValue) {
+        if (typeValue !== data[i].offer.type) {
+          continue;
+        }
       }
 
-      if (priceValue === anyValue) {
-        var price = '';
-
-        if (data[i].offer.price <= PRICE_LOW) {
+      if (priceValue !== anyValue) {
+        var price = data[i].offer.price;
+        if (price <= PRICE_LOW) {
           price = 'low';
-        } else if (data[i].offer.price >= PRICE_HIGH) {
+        } else if (price >= PRICE_HIGH) {
           price = 'high';
         } else {
           price = 'middle';
         }
-
-
-        continue;
+        if (priceValue !== price) {
+          continue;
+        }
       }
 
-      formFeaturesList = formFeaturesList.concat(data[i]);
+      if (roomsValue !== anyValue && !isNaN(roomsValue)) {
+        if (roomsValue !== data[i].offer.rooms) {
+          continue;
+        }
+      }
+
+      if (guestsValue !== anyValue && !isNaN(guestsValue)) {
+        if (guestsValue !== data[i].offer.guests) {
+          continue;
+        }
+      }
+
+      if (formFilterFeatures.length > 0) {
+        for (var j = 0; j < formFilterFeatures.length; j++) {
+          console.log(111, data[i].offer.features);
+          console.log(222, formFilterFeatures[j].value);
+          if (data[i].offer.features.indexOf(formFilterFeatures[j].value) === -1) {
+            formFlagFeatures = true;
+          }
+        }
+        if(formFlagFeatures === true) {
+          continue;
+        }
+      }
+
+
+      filteredCards.push(data[i]);
+
     }
 
     /* if (typeValue !== 'any') {
@@ -99,11 +127,12 @@
       });
     }*/
 
-    var uniqueCards = filteredCards.filter(function (it, i) {
+    /*  var uniqueCards = filteredCards.filter(function (it, i) {
       return filteredCards.indexOf(it) === i;
-    });
+    });*/
 
-    return uniqueCards;
+    console.log(9999999, filteredCards);
+    return filteredCards;
   };
 
   var onFilterChange = function (data) {
