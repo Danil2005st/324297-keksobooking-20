@@ -24,7 +24,7 @@
 
     xhr.timeout = 10000; // 10s
 
-    if(formData) {
+    if (formData) {
       xhr.open('POST', URL);
       xhr.send(formData);
     } else {
