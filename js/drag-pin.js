@@ -4,7 +4,6 @@
   var map = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
   var addressField = document.querySelector('#address');
-
   var MAIN_PIN_HEIGHT = 65;
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_ARROW_HEIGHT = 22;

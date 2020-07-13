@@ -40,7 +40,6 @@
     infoForm.classList.add(formDisabledClass);
     window.pins.remove();
 
-    //infoFormAddress.value = window.pins.getCoordinates(mainMapPin, false);
     mainMapPin.addEventListener('click', activatePage);
   };
 
