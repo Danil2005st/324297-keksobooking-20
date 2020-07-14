@@ -19,42 +19,42 @@
     var formFilterFeatures = formFilters.querySelectorAll('#housing-features input:checked');
 
     for (var i = 0; i < data.length; i++) {
+      var offer = data[i].offer;
       var formFlagFeatures = false;
-      if (typeValue !== anyValue) {
-        if (typeValue !== data[i].offer.type) {
-          continue;
-        }
+
+      if (typeValue !== anyValue && typeValue !== offer.type) {
+        continue;
       }
 
       if (priceValue !== anyValue) {
-        var price = data[i].offer.price;
-        if (price <= PRICE_LOW) {
-          price = 'low';
-        } else if (price >= PRICE_HIGH) {
-          price = 'high';
-        } else {
-          price = 'middle';
+        var price = offer.price;
+        switch (true) {
+          case (price <= PRICE_LOW):
+            price = 'low';
+            break;
+          case (price >= PRICE_HIGH):
+            price = 'high';
+            break;
+          default:
+            price = 'middle';
         }
+
         if (priceValue !== price) {
           continue;
         }
       }
 
-      if (roomsValue !== anyValue && !isNaN(roomsValue)) {
-        if (roomsValue !== data[i].offer.rooms) {
-          continue;
-        }
+      if (roomsValue !== anyValue && !isNaN(roomsValue) && roomsValue !== offer.rooms) {
+        continue;
       }
 
-      if (guestsValue !== anyValue && !isNaN(guestsValue)) {
-        if (guestsValue !== data[i].offer.guests) {
-          continue;
-        }
+      if (guestsValue !== anyValue && !isNaN(guestsValue) && guestsValue !== offer.guests) {
+        continue;
       }
 
       if (formFilterFeatures.length > 0) {
         for (var j = 0; j < formFilterFeatures.length; j++) {
-          if (data[i].offer.features.indexOf(formFilterFeatures[j].value) === -1) {
+          if (offer.features.indexOf(formFilterFeatures[j].value) === -1) {
             formFlagFeatures = true;
           }
         }
