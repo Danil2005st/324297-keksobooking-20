@@ -26,22 +26,15 @@
         continue;
       }
 
-      if (priceValue !== anyValue) {
-        var price = offer.price;
-        switch (true) {
-          case (price <= PRICE_LOW):
-            price = 'low';
-            break;
-          case (price >= PRICE_HIGH):
-            price = 'high';
-            break;
-          default:
-            price = 'middle';
-        }
-
-        if (priceValue !== price) {
-          continue;
-        }
+      var checkPrice = false;
+      switch (priceValue) {
+        case 'any': checkPrice = true; break;
+        case 'low': checkPrice = offer.price <= PRICE_LOW; break;
+        case 'high': checkPrice = offer.price >= PRICE_HIGH; break;
+        case 'middle': checkPrice = PRICE_LOW < offer.price && offer.price < PRICE_HIGH; break;
+      }
+      if (!checkPrice) {
+        continue;
       }
 
       if (roomsValue !== anyValue && !isNaN(roomsValue) && roomsValue !== offer.rooms) {
