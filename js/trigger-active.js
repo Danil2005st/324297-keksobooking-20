@@ -39,6 +39,9 @@
     map.classList.add(mapFadedClass);
     infoForm.classList.add(formDisabledClass);
     window.pins.remove();
+    window.card.close();
+    window.map.pinCentering();
+    window.form.reset();
 
     mainMapPin.addEventListener('click', activatePage);
   };
@@ -51,7 +54,7 @@
 
   var onSuccess = function (data) {
     window.filter.onFilterChange(data);
-    window.createMapPins(data);
+    window.map.cretePins(data);
   };
 
   var onError = function () {

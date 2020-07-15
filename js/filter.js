@@ -28,10 +28,18 @@
 
       var checkPrice = false;
       switch (priceValue) {
-        case 'any': checkPrice = true; break;
-        case 'low': checkPrice = offer.price <= PRICE_LOW; break;
-        case 'high': checkPrice = offer.price >= PRICE_HIGH; break;
-        case 'middle': checkPrice = PRICE_LOW < offer.price && offer.price < PRICE_HIGH; break;
+        case 'any':
+          checkPrice = true;
+          break;
+        case 'low':
+          checkPrice = offer.price <= PRICE_LOW;
+          break;
+        case 'high':
+          checkPrice = offer.price >= PRICE_HIGH;
+          break;
+        case 'middle':
+          checkPrice = PRICE_LOW < offer.price && offer.price < PRICE_HIGH;
+          break;
       }
       if (!checkPrice) {
         continue;
@@ -67,7 +75,7 @@
     formFilters.addEventListener('change', window.debounce(function () {
       window.pins.remove();
       window.card.close();
-      window.createMapPins(getFilterParams(data));
+      window.map.cretePins(getFilterParams(data));
     }));
   };
 

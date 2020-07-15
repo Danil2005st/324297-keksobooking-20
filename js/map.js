@@ -6,6 +6,12 @@
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
   var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
+  var mainMapPin = document.querySelector('.map__pin--main');
+  var pinPosition = mainMapPin.getAttribute('style');
+
+  var pinCentering = function () {
+    mainMapPin.setAttribute('style', pinPosition);
+  };
 
   var createPinElement = function (pin, index) {
     var newPin = mapPin.cloneNode(true);
@@ -23,7 +29,7 @@
     return newPin;
   };
 
-  window.createMapPins = function (pins) {
+  var cretePins = function (pins) {
     var pinsList = document.createDocumentFragment();
     var MAX_PINS_COUNT = 5;
     var pinsLength;
@@ -39,5 +45,10 @@
     }
 
     mapPins.appendChild(pinsList);
+  };
+
+  window.map = {
+    cretePins: cretePins,
+    pinCentering: pinCentering
   };
 })();

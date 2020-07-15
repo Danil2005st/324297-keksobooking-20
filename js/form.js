@@ -9,6 +9,9 @@
   var infoFormTimein = infoForm.querySelector('#timein');
   var infoFormTimeout = infoForm.querySelector('#timeout');
   var URL = 'https://javascript.pages.academy/keksobooking';
+  var infoFormReset = infoForm.querySelector('.ad-form__reset');
+  var infoFormAddress = infoForm.querySelector('#address');
+  var mainMapPin = document.querySelector('.map__pin--main');
 
   var validateRooms = function () {
     var rooms = Number(infoFormRoomNumber.value);
@@ -58,9 +61,15 @@
 
   var onSuccess = function () {
     window.triggerActive.disactivateElements();
+    window.message.success();
   };
 
   var onError = function () {
+    window.message.error();
+  };
+
+  var reset = function () {
+    infoForm.reset();
   };
 
   validateRooms();
@@ -79,4 +88,14 @@
     evt.preventDefault();
     window.load(URL, onSuccess, onError, formData);
   });
+
+  infoFormReset.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    window.form.reset();
+    infoFormAddress.value = window.pins.getCoordinates(mainMapPin, false);
+  });
+
+  window.form = {
+    reset: reset
+  };
 })();
