@@ -51,7 +51,7 @@
       addressField.value = window.pins.getCoordinates(mainPin, true);
     };
 
-    addressField.value = window.pins.getCoordinates(mainPin, false);
+    addressField.value = window.pins.getCoordinates(mainPin, true);
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();

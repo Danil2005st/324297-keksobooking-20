@@ -92,7 +92,7 @@
   infoFormReset.addEventListener('click', function (evt) {
     evt.preventDefault();
     window.form.reset();
-    infoFormAddress.value = window.pins.getCoordinates(mainMapPin, false);
+    infoFormAddress.value = window.pins.getCoordinates(mainMapPin, true);
   });
 
   window.form = {
