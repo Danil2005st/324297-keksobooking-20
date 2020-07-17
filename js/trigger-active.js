@@ -48,16 +48,13 @@
 
   var activatePage = function () {
     activateElements();
-    window.load(URL, onSuccess, onError);
+    window.load(URL, onSuccess);
     mainMapPin.removeEventListener('click', activatePage);
   };
 
   var onSuccess = function (data) {
     window.filter.onFilterChange(data);
     window.map.cretePins(data);
-  };
-
-  var onError = function () {
   };
 
   disactivateElements();

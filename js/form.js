@@ -12,6 +12,11 @@
   var infoFormReset = infoForm.querySelector('.ad-form__reset');
   var infoFormAddress = infoForm.querySelector('#address');
   var mainMapPin = document.querySelector('.map__pin--main');
+  var avatarChooser = document.querySelector('.ad-form-header__input');
+  var avatarPreview = document.querySelector('.ad-form-header__preview');
+  var avatarDefaultImg = avatarPreview.querySelector('img');
+  var photoChooser = document.querySelector('.ad-form__input');
+  var photoPreview = document.querySelector('.ad-form__photo');
 
   var validateRooms = function () {
     var rooms = Number(infoFormRoomNumber.value);
@@ -69,6 +74,8 @@
   };
 
   var reset = function () {
+    window.photo.reset(avatarPreview, avatarDefaultImg);
+    window.photo.remove(photoPreview);
     infoForm.reset();
   };
 
@@ -95,7 +102,13 @@
     infoFormAddress.value = window.pins.getCoordinates(mainMapPin, true);
   });
 
-  window.photo.upload();
+  avatarChooser.addEventListener('change', function () {
+    window.photo.upload(avatarChooser, avatarPreview);
+  });
+
+  photoChooser.addEventListener('change', function () {
+    window.photo.upload(photoChooser, photoPreview);
+  });
 
   window.form = {
     reset: reset

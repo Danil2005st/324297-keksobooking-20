@@ -3,29 +3,45 @@
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
+  var remove = function (holder) {
+    var oldImg = holder.querySelector('img');
+    if (oldImg) {
+      holder.removeChild(oldImg);
+    }
+  };
+
+  var reset = function (holder, img) {
+    remove(holder);
+    holder.appendChild(img);
+  };
+
   var upload = function (fileChooser, preview) {
-    fileChooser.addEventListener('change', function () {
-      var file = fileChooser.files[0];
-      var fileName = file.name.toLowerCase();
+    var file = fileChooser.files[0];
+    var fileName = file.name.toLowerCase();
 
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
 
-      var matches = FILE_TYPES.some(function (it) {
-        return fileName.endsWith(it);
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        remove(preview);
+        var newImg = document.createElement('img');
+        newImg.src = reader.result;
+        newImg.width = 40;
+        newImg.height = 44;
+        preview.appendChild(newImg);
       });
 
-      if (matches) {
-        var reader = new FileReader();
-
-        reader.addEventListener('load', function () {
-          preview.src = reader.result;
-        });
-
-        reader.readAsDataURL(file);
-      }
-    });
+      reader.readAsDataURL(file);
+    }
   };
 
   window.photo = {
-    upload: upload(fileChooser, preview)
+    upload: upload,
+    remove: remove,
+    reset: reset
   };
 })();
