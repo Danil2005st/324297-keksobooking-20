@@ -95,6 +95,8 @@
     infoFormAddress.value = window.pins.getCoordinates(mainMapPin, true);
   });
 
+  window.photo.upload();
+
   window.form = {
     reset: reset
   };
