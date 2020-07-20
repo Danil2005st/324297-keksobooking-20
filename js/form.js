@@ -65,7 +65,7 @@
   };
 
   var onSuccess = function () {
-    window.triggerActive.disactivateElements();
+    window.triggerActive.deactivateElements();
     window.message.success();
   };
 

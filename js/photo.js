@@ -23,20 +23,21 @@
       return fileName.endsWith(it);
     });
 
-    if (matches) {
-      var reader = new FileReader();
-
-      reader.addEventListener('load', function () {
-        remove(preview);
-        var newImg = document.createElement('img');
-        newImg.src = reader.result;
-        newImg.width = 40;
-        newImg.height = 44;
-        preview.appendChild(newImg);
-      });
-
-      reader.readAsDataURL(file);
+    if (!matches) {
+      return;
     }
+
+    var reader = new FileReader();
+
+    reader.addEventListener('load', function () {
+      remove(preview);
+      var newImg = document.createElement('img');
+      newImg.src = reader.result;
+      newImg.width = 40;
+      newImg.height = 44;
+      preview.appendChild(newImg);
+    });
+    reader.readAsDataURL(file);
   };
 
   window.photo = {

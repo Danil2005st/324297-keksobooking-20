@@ -3,47 +3,68 @@
 (function () {
   var main = document.querySelector('main');
   var successBlock = document.querySelector('#success').content.querySelector('.success');
-  var successMessage = 'success__message';
+  var successMessageText = 'success__message';
   var errorBlock = document.querySelector('#error').content.querySelector('.error');
-  var errorMessage = 'error__message';
-  var errorButtonClass = 'error__button';
+  var errorMessageText = 'error__message';
 
-  var onClick = function (item, message) {
-    item.addEventListener('click', function (evt) {
-      if (evt.target.className !== message && evt.target.className !== errorButtonClass) {
-        item.remove();
-      }
-    });
+  var closeSuccess = function () {
+    var successMessage = document.querySelector('.success');
+    successMessage.addEventListener('click', removeSuccess);
+    document.addEventListener('keydown', removeSuccessKey);
   };
 
-  var onEscPress = function (item) {
-    document.addEventListener('keydown', function (evt) {
-      if (evt.key === 'Escape') {
-        item.remove();
-      }
-    });
+  var removeSuccess = function (evt) {
+    var successMessage = document.querySelector('.success');
+    if (evt.target.className !== successMessageText) {
+      successMessage.remove();
+      document.removeEventListener('keydown', removeSuccessKey);
+      successMessage.removeEventListener('click', removeSuccess);
+    }
   };
 
-  var close = function (item, message) {
-    onClick(item, message);
-    onEscPress(item);
+  var removeSuccessKey = function (evt) {
+    var successMessage = document.querySelector('.success');
+    if (evt.key === 'Escape') {
+      successMessage.remove();
+      document.removeEventListener('keydown', removeSuccessKey);
+      successMessage.removeEventListener('click', removeSuccess);
+    }
+  };
+
+  var closeError = function () {
+    var errorMessage = document.querySelector('.error');
+    errorMessage.addEventListener('click', removeError);
+    document.addEventListener('keydown', removeErrorKey);
+  };
+
+  var removeError = function (evt) {
+    var errorMessage = document.querySelector('.error');
+    if (evt.target.className !== errorMessageText) {
+      errorMessage.remove();
+      document.removeEventListener('keydown', removeErrorKey);
+      errorMessage.removeEventListener('click', removeError);
+    }
+  };
+
+  var removeErrorKey = function (evt) {
+    var errorMessage = document.querySelector('.error');
+    if (evt.key === 'Escape') {
+      errorMessage.remove();
+      document.removeEventListener('keydown', removeErrorKey);
+      errorMessage.removeEventListener('click', removeError);
+    }
   };
 
   var success = function () {
     var messageBlock = successBlock.cloneNode(true);
     main.appendChild(messageBlock);
-    close(messageBlock, successMessage);
+    closeSuccess();
   };
 
   var error = function () {
     var messageBlock = errorBlock.cloneNode(true);
     main.appendChild(messageBlock);
-    close(messageBlock, errorMessage);
-    var errorButton = document.querySelector('.' + errorButtonClass);
-
-    errorButton.addEventListener('click', function () {
-      messageBlock.remove();
-    });
+    closeError();
   };
 
   window.message = {

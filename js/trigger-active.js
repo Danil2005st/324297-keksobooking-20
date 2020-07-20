@@ -32,7 +32,7 @@
     infoFormAddress.value = window.pins.getCoordinates(mainMapPin, true);
   };
 
-  var disactivateElements = function () {
+  var deactivateElements = function () {
     setDisabled(infoFormBlocks, true);
     setDisabled(mapFormSelects, true);
     setDisabled(mapFormBlocks, true);
@@ -57,11 +57,11 @@
     window.map.cretePins(data);
   };
 
-  disactivateElements();
+  deactivateElements();
   mainMapPin.addEventListener('click', activatePage);
 
   window.triggerActive = {
     activateElements: activateElements,
-    disactivateElements: disactivateElements
+    deactivateElements: deactivateElements
   };
 })();
