@@ -40,9 +40,8 @@
     infoForm.classList.add(formDisabledClass);
     window.pins.remove();
     window.card.close();
-    window.map.pinCentering();
+    window.map.centeringPin();
     window.form.reset();
-
     mainMapPin.addEventListener('click', activatePage);
   };
 
@@ -53,7 +52,7 @@
   };
 
   var onSuccess = function (data) {
-    window.filter.onFilterChange(data);
+    window.filter.change(data);
     window.map.cretePins(data);
   };
 
@@ -61,7 +60,7 @@
   mainMapPin.addEventListener('click', activatePage);
 
   window.triggerActive = {
-    activateElements: activateElements,
-    deactivateElements: deactivateElements
+    activate: activateElements,
+    deactivate: deactivateElements
   };
 })();

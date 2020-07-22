@@ -49,7 +49,7 @@
         continue;
       }
 
-      if (guestsValue !== anyValue && !isNaN(guestsValue) && guestsValue !== offer.guests) {
+      if (anyValue !== guestsValue && !isNaN(guestsValue) && guestsValue !== offer.guests) {
         continue;
       }
 
@@ -71,7 +71,7 @@
     return filteredCards;
   };
 
-  var onFilterChange = function (data) {
+  var onChange = function (data) {
     formFilters.addEventListener('change', window.debounce(function () {
       window.pins.remove();
       window.card.close();
@@ -80,6 +80,6 @@
   };
 
   window.filter = {
-    onFilterChange: onFilterChange
+    change: onChange
   };
 })();

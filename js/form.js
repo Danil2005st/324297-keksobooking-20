@@ -18,7 +18,7 @@
   var photoChooser = document.querySelector('.ad-form__input');
   var photoPreview = document.querySelector('.ad-form__photo');
 
-  var validateRooms = function () {
+  var onChooseRooms = function () {
     var rooms = Number(infoFormRoomNumber.value);
     var guest = Number(infoFormCapacity.value);
 
@@ -35,7 +35,7 @@
     }
   };
 
-  var changePriceRoom = function () {
+  var onChangePriceRoom = function () {
     var pricePerNight;
     switch (infoFormType.value) {
       case 'flat':
@@ -55,7 +55,7 @@
     infoFormPrice.setAttribute('placeholder', pricePerNight);
   };
 
-  var changeTime = function (timeFirst, timeSecond) {
+  var onChangeTime = function (timeFirst, timeSecond) {
     var options = timeFirst.getElementsByTagName('option');
     for (var i = 0; i < options.length; i++) {
       if (options[i].value === timeSecond.value) {
@@ -65,7 +65,7 @@
   };
 
   var onSuccess = function () {
-    window.triggerActive.deactivateElements();
+    window.triggerActive.deactivate();
     window.message.success();
   };
 
@@ -73,22 +73,23 @@
     window.message.error();
   };
 
-  var reset = function () {
+  var onReset = function () {
     window.photo.reset(avatarPreview, avatarDefaultImg);
     window.photo.remove(photoPreview);
     infoForm.reset();
+   //window.triggerActive.deactivate();
   };
 
-  validateRooms();
-  changePriceRoom();
-  infoFormRoomNumber.addEventListener('change', validateRooms);
-  infoFormCapacity.addEventListener('change', validateRooms);
-  infoFormType.addEventListener('change', changePriceRoom);
+  onChooseRooms();
+  onChangePriceRoom();
+  infoFormRoomNumber.addEventListener('change', onChooseRooms);
+  infoFormCapacity.addEventListener('change', onChooseRooms);
+  infoFormType.addEventListener('change', onChangePriceRoom);
   infoFormTimein.addEventListener('change', function () {
-    changeTime(infoFormTimeout, infoFormTimein);
+    onChangeTime(infoFormTimeout, infoFormTimein);
   });
   infoFormTimeout.addEventListener('change', function () {
-    changeTime(infoFormTimein, infoFormTimeout);
+    onChangeTime(infoFormTimein, infoFormTimeout);
   });
   infoForm.addEventListener('submit', function (evt) {
     var formData = new FormData(infoForm);
@@ -111,6 +112,6 @@
   });
 
   window.form = {
-    reset: reset
+    reset: onReset
   };
 })();

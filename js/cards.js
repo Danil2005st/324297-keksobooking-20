@@ -24,7 +24,7 @@
     return typeRoom;
   };
 
-  var getCardFeaturese = function (items) {
+  var getCardFeatures = function (items) {
     var featuresList = document.createDocumentFragment();
 
     for (var i = 0; i < items.length; i++) {
@@ -33,7 +33,6 @@
       featuresListItem.classList.add('popup__feature--' + items[i]);
       featuresList.appendChild(featuresListItem);
     }
-
     return featuresList;
   };
 
@@ -56,7 +55,7 @@
     var cardType = newCard.querySelector('.popup__type');
     var cardCapacity = newCard.querySelector('.popup__text--capacity');
     var cardCheckTime = newCard.querySelector('.popup__text--time');
-    var cardFeaturese = newCard.querySelector('.popup__features');
+    var cardFeatures = newCard.querySelector('.popup__features');
     var cardDescription = newCard.querySelector('.popup__description');
     var cardPhotos = newCard.querySelector('.popup__photos');
     var cardPhoto = cardPhotos.querySelector('img');
@@ -99,10 +98,10 @@
     }
 
     if (item.offer.features) {
-      cardFeaturese.textContent = '';
-      cardFeaturese.appendChild(getCardFeaturese(item.offer.features));
+      cardFeatures.textContent = '';
+      cardFeatures.appendChild(getCardFeatures(item.offer.features));
     } else {
-      cardFeaturese.classList.add('visually-hidden');
+      cardFeatures.classList.add('visually-hidden');
     }
 
     if (item.offer.photos) {

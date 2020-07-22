@@ -9,7 +9,7 @@
   var mainMapPin = document.querySelector('.map__pin--main');
   var pinPosition = mainMapPin.getAttribute('style');
 
-  var pinCentering = function () {
+  var centeringPin = function () {
     mainMapPin.setAttribute('style', pinPosition);
   };
 
@@ -25,7 +25,6 @@
     newPin.addEventListener('click', function () {
       window.card.open(pin);
     });
-
     return newPin;
   };
 
@@ -49,6 +48,6 @@
 
   window.map = {
     cretePins: cretePins,
-    pinCentering: pinCentering
+    centeringPin: centeringPin
   };
 })();
