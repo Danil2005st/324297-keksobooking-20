@@ -56,7 +56,6 @@
     window.map.cretePins(data);
   };
 
-  deactivateElements();
   mainMapPin.addEventListener('click', activatePage);
 
   window.triggerActive = {

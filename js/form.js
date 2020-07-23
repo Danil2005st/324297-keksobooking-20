@@ -77,7 +77,6 @@
     window.photo.reset(avatarPreview, avatarDefaultImg);
     window.photo.remove(photoPreview);
     infoForm.reset();
-   //window.triggerActive.deactivate();
   };
 
   onChooseRooms();
@@ -99,7 +98,8 @@
 
   infoFormReset.addEventListener('click', function (evt) {
     evt.preventDefault();
-    window.form.reset();
+    onReset();
+    window.triggerActive.deactivate();
     infoFormAddress.value = window.pins.getCoordinates(mainMapPin, true);
   });
 
