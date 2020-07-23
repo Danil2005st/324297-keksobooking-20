@@ -66,11 +66,12 @@
 
   var onSuccess = function () {
     window.triggerActive.deactivate();
-    window.message.success();
+    window.message.showSuccess();
   };
 
   var onError = function () {
-    window.message.error();
+    window.triggerActive.deactivate();
+    window.message.showError();
   };
 
   var onReset = function () {

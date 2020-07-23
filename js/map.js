@@ -31,13 +31,7 @@
   var cretePins = function (pins) {
     var pinsList = document.createDocumentFragment();
     var MAX_PINS_COUNT = 5;
-    var pinsLength;
-
-    if (pins.length > MAX_PINS_COUNT) {
-      pinsLength = MAX_PINS_COUNT;
-    } else {
-      pinsLength = pins.length;
-    }
+    var pinsLength = pins.length > MAX_PINS_COUNT ? MAX_PINS_COUNT : pins.length;
 
     for (var i = 0; i < pinsLength; i++) {
       pinsList.appendChild(createPinElement(pins[i], i));

@@ -14,13 +14,13 @@
   var formDisabledClass = 'ad-form--disabled';
 
   var setDisabled = function (list, value) {
-    for (var i = 0; i < list.length; i++) {
+    list.forEach(function(item) {
       if (value) {
-        list[i].setAttribute('disabled', '');
+        item.setAttribute('disabled', '');
       } else {
-        list[i].removeAttribute('disabled');
+        item.removeAttribute('disabled');
       }
-    }
+    });
   };
 
   var activateElements = function () {
@@ -55,7 +55,7 @@
     window.filter.change(data);
     window.map.cretePins(data);
   };
-
+  deactivateElements();
   mainMapPin.addEventListener('click', activatePage);
 
   window.triggerActive = {

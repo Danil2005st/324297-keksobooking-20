@@ -26,24 +26,23 @@
 
   var getCardFeatures = function (items) {
     var featuresList = document.createDocumentFragment();
-
-    for (var i = 0; i < items.length; i++) {
+    items.forEach(function (item) {
       var featuresListItem = document.createElement('li');
       featuresListItem.classList.add('popup__feature');
-      featuresListItem.classList.add('popup__feature--' + items[i]);
+      featuresListItem.classList.add('popup__feature--' + item);
       featuresList.appendChild(featuresListItem);
-    }
+    });
     return featuresList;
   };
 
   var getCardPhotos = function (photosData, photo) {
     var photosList = document.createDocumentFragment();
 
-    for (var i = 0; i < photosData.length; i++) {
+    photosData.forEach(function (item) {
       var cardPhoto = photo.cloneNode(true);
-      cardPhoto.src = photosData[i];
+      cardPhoto.src = item;
       photosList.appendChild(cardPhoto);
-    }
+    });
     return photosList;
   };
 

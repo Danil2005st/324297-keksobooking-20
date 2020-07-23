@@ -55,20 +55,20 @@
     }
   };
 
-  var success = function () {
+  var showSuccess = function () {
     var messageBlock = successBlock.cloneNode(true);
     main.appendChild(messageBlock);
     closeSuccess();
   };
 
-  var error = function () {
+  var showError = function () {
     var messageBlock = errorBlock.cloneNode(true);
     main.appendChild(messageBlock);
     closeError();
   };
 
   window.message = {
-    success: success,
-    error: error
+    showSuccess: showSuccess,
+    showError: showError
   };
 })();

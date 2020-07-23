@@ -54,11 +54,11 @@
       }
 
       if (formFilterFeatures.length > 0) {
-        for (var j = 0; j < formFilterFeatures.length; j++) {
-          if (offer.features.indexOf(formFilterFeatures[j].value) === -1) {
+        formFilterFeatures.forEach(function (item) {
+          if (offer.features.indexOf(item.value) === -1) {
             formFlagFeatures = true;
           }
-        }
+        });
       }
 
       if (formFlagFeatures) {
