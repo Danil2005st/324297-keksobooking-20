@@ -14,7 +14,7 @@
   var formDisabledClass = 'ad-form--disabled';
 
   var setDisabled = function (list, value) {
-    list.forEach(function(item) {
+    list.forEach(function (item) {
       if (value) {
         item.setAttribute('disabled', '');
       } else {
