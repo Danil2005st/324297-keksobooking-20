@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var KEY_CODE_ESCAPE = 'Escape';
+
   var main = document.querySelector('main');
   var successBlock = document.querySelector('#success').content.querySelector('.success');
   var successMessageText = 'success__message';
@@ -24,7 +26,7 @@
 
   var removeSuccessByKey = function (evt) {
     var successMessage = document.querySelector('.success');
-    if (evt.key === 'Escape') {
+    if (evt.key === KEY_CODE_ESCAPE) {
       successMessage.remove();
       document.removeEventListener('keydown', removeSuccessByKey);
       successMessage.removeEventListener('click', removeSuccess);
@@ -48,7 +50,7 @@
 
   var removeErrorByKey = function (evt) {
     var errorMessage = document.querySelector('.error');
-    if (evt.key === 'Escape') {
+    if (evt.key === KEY_CODE_ESCAPE) {
       errorMessage.remove();
       document.removeEventListener('keydown', removeErrorByKey);
       errorMessage.removeEventListener('click', removeError);

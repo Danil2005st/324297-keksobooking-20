@@ -1,14 +1,15 @@
 'use strict';
 
 (function () {
+  var ANY_VALUE = 'any';
+  var PRICE_LOW = 10000;
+  var PRICE_HIGH = 50000;
+
   var formFilters = document.querySelector('.map__filters');
   var formFilterType = formFilters.querySelector('#housing-type');
   var formFilterPrice = formFilters.querySelector('#housing-price');
   var formFilterRooms = formFilters.querySelector('#housing-rooms');
   var formFilterGuests = formFilters.querySelector('#housing-guests');
-  var anyValue = 'any';
-  var PRICE_LOW = 10000;
-  var PRICE_HIGH = 50000;
 
   var getFilterParams = function (data) {
     var filteredCards = [];
@@ -22,7 +23,7 @@
       var offer = data[i].offer;
       var formFlagFeatures = false;
 
-      if (typeValue !== anyValue && typeValue !== offer.type) {
+      if (typeValue !== ANY_VALUE && typeValue !== offer.type) {
         continue;
       }
 
@@ -45,11 +46,11 @@
         continue;
       }
 
-      if (roomsValue !== anyValue && !isNaN(roomsValue) && roomsValue !== offer.rooms) {
+      if (roomsValue !== ANY_VALUE && !isNaN(roomsValue) && roomsValue !== offer.rooms) {
         continue;
       }
 
-      if (anyValue !== guestsValue && !isNaN(guestsValue) && guestsValue !== offer.guests) {
+      if (ANY_VALUE !== guestsValue && !isNaN(guestsValue) && guestsValue !== offer.guests) {
         continue;
       }
 

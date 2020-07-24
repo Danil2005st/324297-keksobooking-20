@@ -1,13 +1,15 @@
 'use strict';
 
 (function () {
+  var statusCodeOk = 200;
+
   window.load = function (URL, onSuccess, onError, formData) {
     var xhr = new XMLHttpRequest();
 
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === statusCodeOk) {
         onSuccess(xhr.response);
       } else {
         onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);

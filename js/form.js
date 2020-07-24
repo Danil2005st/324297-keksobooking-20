@@ -1,6 +1,14 @@
 'use strict';
 
 (function () {
+  var URL = 'https://javascript.pages.academy/keksobooking';
+  var PriceRoom = {
+    BUNGALO: 0,
+    FLAT: 1000,
+    HOUSE: 5000,
+    PALACE: 10000
+  };
+
   var infoForm = document.querySelector('.ad-form');
   var infoFormRoomNumber = infoForm.querySelector('#room_number');
   var infoFormCapacity = infoForm.querySelector('#capacity');
@@ -8,7 +16,6 @@
   var infoFormPrice = infoForm.querySelector('#price');
   var infoFormTimein = infoForm.querySelector('#timein');
   var infoFormTimeout = infoForm.querySelector('#timeout');
-  var URL = 'https://javascript.pages.academy/keksobooking';
   var infoFormReset = infoForm.querySelector('.ad-form__reset');
   var infoFormAddress = infoForm.querySelector('#address');
   var mainMapPin = document.querySelector('.map__pin--main');
@@ -36,23 +43,10 @@
   };
 
   var onChangePriceRoom = function () {
-    var pricePerNight;
-    switch (infoFormType.value) {
-      case 'flat':
-        pricePerNight = 1000;
-        break;
-      case 'bungalo':
-        pricePerNight = 0;
-        break;
-      case 'house':
-        pricePerNight = 5000;
-        break;
-      case 'palace':
-        pricePerNight = 10000;
-        break;
-    }
-    infoFormPrice.setAttribute('min', pricePerNight);
-    infoFormPrice.setAttribute('placeholder', pricePerNight);
+    var value = infoFormType.value.toUpperCase();
+
+    infoFormPrice.setAttribute('min', PriceRoom[value]);
+    infoFormPrice.setAttribute('placeholder', PriceRoom[value]);
   };
 
   var onChangeTime = function (timeFirst, timeSecond) {

@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var URL = 'https://javascript.pages.academy/keksobooking/data';
+
   var map = document.querySelector('.map');
   var infoForm = document.querySelector('.ad-form');
   var infoFormBlocks = infoForm.querySelectorAll('fieldset');
@@ -9,7 +11,6 @@
   var mapFormSelects = mapForm.querySelectorAll('select');
   var mapFormBlocks = mapForm.querySelectorAll('fieldset');
   var mainMapPin = document.querySelector('.map__pin--main');
-  var URL = 'https://javascript.pages.academy/keksobooking/data';
   var mapFadedClass = 'map--faded';
   var formDisabledClass = 'ad-form--disabled';
 

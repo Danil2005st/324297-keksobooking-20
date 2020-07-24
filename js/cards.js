@@ -1,26 +1,23 @@
 'use strict';
 
 (function () {
+  var HIDDEN_CLASS = 'visually-hidden';
+  var KEY_CODE_ESCAPE = 'Escape';
+  var TypeRoom = {
+    BUNGALO: 'Бунгало',
+    FLAT: 'Квартира',
+    HOUSE: 'Дом',
+    PALACE: 'Дворец'
+  };
+
   var map = document.querySelector('.map');
   var mapFilters = map.querySelector('.map__filters-container');
   var mapCard = document.querySelector('#card').content.querySelector('.map__card');
 
   var getCardType = function (item) {
-    var typeRoom;
-    switch (item) {
-      case 'flat':
-        typeRoom = 'Квартира';
-        break;
-      case 'bungalo':
-        typeRoom = 'Бунгало';
-        break;
-      case 'house':
-        typeRoom = 'Дом';
-        break;
-      case 'palace':
-        typeRoom = 'Дворец';
-        break;
-    }
+    var value = item.toUpperCase();
+    var typeRoom = TypeRoom[value];
+
     return typeRoom;
   };
 
@@ -63,69 +60,69 @@
     if (item.offer.title) {
       cardTitle.textContent = item.offer.title;
     } else {
-      cardTitle.classList.add('visually-hidden');
+      cardTitle.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.address) {
       cardAddress.textContent = item.offer.address;
     } else {
-      cardAddress.classList.add('visually-hidden');
+      cardAddress.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.price) {
       cardPrice.textContent = item.offer.price + '₽/ночь';
     } else {
-      cardPrice.classList.add('visually-hidden');
+      cardPrice.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.type) {
       cardType.textContent = getCardType(item.offer.type);
     } else {
-      cardType.classList.add('visually-hidden');
+      cardType.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.rooms !== 0 || item.offer.guests !== 0) {
       cardCapacity.textContent = item.offer.rooms + ' комнаты для ' + item.offer.guests + ' гостей';
     } else {
-      cardCapacity.classList.add('visually-hidden');
+      cardCapacity.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.checkin || item.offer.checkout) {
       cardCheckTime.textContent = 'Заезд после ' + item.offer.checkin + ', выезд до ' + item.offer.checkout;
     } else {
-      cardCheckTime.classList.add('visually-hidden');
+      cardCheckTime.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.features) {
       cardFeatures.textContent = '';
       cardFeatures.appendChild(getCardFeatures(item.offer.features));
     } else {
-      cardFeatures.classList.add('visually-hidden');
+      cardFeatures.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.photos) {
       cardPhotos.textContent = '';
       cardPhotos.appendChild(getCardPhotos(item.offer.photos, cardPhoto));
     } else {
-      cardPhotos.classList.add('visually-hidden');
+      cardPhotos.classList.add(HIDDEN_CLASS);
     }
 
     if (item.offer.description) {
       cardDescription.textContent = item.offer.description;
     } else {
-      cardDescription.classList.add('visually-hidden');
+      cardDescription.classList.add(HIDDEN_CLASS);
     }
 
     if (item.author.avatar) {
       avatarPhoto.src = item.author.avatar;
     } else {
-      avatarPhoto.classList.add('visually-hidden');
+      avatarPhoto.classList.add(HIDDEN_CLASS);
     }
     return newCard;
   };
 
   var onEscPress = function (evt) {
-    if (evt.key === 'Escape') {
+    if (evt.key === KEY_CODE_ESCAPE) {
       close();
     }
   };

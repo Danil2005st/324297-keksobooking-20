@@ -793,6 +793,10 @@ fieldset {
 
   background-color: #e4e4de;
   border-radius: 5px;
+
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
 }
 
 .ad-form__element--submit {
