@@ -124,6 +124,7 @@
   var onEscPress = function (evt) {
     if (evt.key === KEY_CODE_ESCAPE) {
       close();
+      window.map.removeActiveClass();
     }
   };
 
@@ -131,6 +132,7 @@
     var cardElement = createElement(data);
     cardElement.querySelector('.popup__close').addEventListener('click', function () {
       close();
+      window.map.removeActiveClass();
     });
     close();
     mapFilters.before(cardElement);

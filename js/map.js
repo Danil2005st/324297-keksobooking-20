@@ -3,6 +3,8 @@
 (function () {
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
+  var PIN_ACTIVE = 'map__pin--active';
+
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
   var mapPin = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -11,6 +13,14 @@
 
   var centeringPin = function () {
     mainMapPin.setAttribute('style', pinPosition);
+  };
+
+  var removeActiveClass = function () {
+    var activePin = document.querySelector('.' + PIN_ACTIVE);
+
+    if (activePin) {
+      activePin.classList.remove(PIN_ACTIVE);
+    }
   };
 
   var createPinElement = function (pin, index) {
@@ -23,6 +33,8 @@
     img.alt = pin.offer.title;
 
     newPin.addEventListener('click', function () {
+      removeActiveClass();
+      newPin.classList.add(PIN_ACTIVE);
       window.card.open(pin);
     });
     return newPin;
@@ -42,6 +54,7 @@
 
   window.map = {
     cretePins: cretePins,
-    centeringPin: centeringPin
+    centeringPin: centeringPin,
+    removeActiveClass: removeActiveClass
   };
 })();
